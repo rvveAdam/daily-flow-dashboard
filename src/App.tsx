@@ -1,18 +1,23 @@
-import ExpenseModule from "./components/expenses/ExpenseModule";
-import TaskDashboard from "./components/tasks/TaskDashboard";
+import { useState } from 'react'
+import ExpenseModule from "./components/expenses/ExpenseModule"
+import TaskDashboard from "./components/tasks/TaskDashboard"
+import FocusButton from "./components/focus/FocusButton" 
 
 function App() {
+  const [isFocusMode, setIsFocusMode] = useState(false)
+
+  const handleToggleFocus = () => {
+    setIsFocusMode(!isFocusMode)
+  }
+
   return (
     <div>
-      {/* dodany H1 */}
       <h1>Daily Flow Dashboard</h1>
-      {/* dodany p */}
-      <p>Witaj w aplikacji</p>
-      <TaskDashboard></TaskDashboard>
-      <ExpenseModule></ExpenseModule>
+      <FocusButton isFocusMode={isFocusMode} onToggle={handleToggleFocus} />
+      {!isFocusMode && <TaskDashboard />}
+      {!isFocusMode && <ExpenseModule />}
     </div>
-  );
+  )
 }
 
-/* dodany export default */
-export default App;
+export default App

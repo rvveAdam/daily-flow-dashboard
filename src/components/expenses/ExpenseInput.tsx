@@ -31,12 +31,9 @@ function ExpenseInput({ onAddExpense, categories, onAddCategory }: ExpenseInputP
     setAmount('')
     setDescription('')
   }
-
-    // 1. Nowy stan dla inputa kategorii
     const [newCategory, setNewCategory] = useState('')
 
-    // 2. Funkcja obsługująca dodanie kategorii
-    const handleAddCategory = () => {
+        const handleAddCategory = () => {
         onAddCategory(newCategory)
         setNewCategory('')
     }
