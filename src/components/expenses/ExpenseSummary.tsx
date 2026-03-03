@@ -21,9 +21,13 @@ function ExpenseSummary({ expenses }: ExpenseSummaryProps) {
     .reduce((acc, expense) => acc + expense.amount, 0)
 
   return (
-    <div>
-        <p>Wydano dziś: {wydaneDzisiaj} PLN</p>
-        <p>Wydatek w tym miesiącu: {wydaneMiesiac}</p>
+    <div className="expense-summary">
+        <p className="expense-summary__item">
+          Dziś: <span className="expense-summary__amount">{wydaneDzisiaj} PLN</span>
+        </p>
+        <p className="expense-summary__item">
+          Ten miesiąc: <span className="expense-summary__amount">{wydaneMiesiac} PLN</span>
+        </p>
     </div>
   )
 }

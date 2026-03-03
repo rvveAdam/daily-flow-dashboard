@@ -4,16 +4,19 @@ import TaskItem from './TaskItem'
 import AddTaskForm from './AddTaskForm'
 
 function TaskDashboard() {
-const [tasks, setTasks] = useState<Task[]>(() => {
-    const savedTasks = localStorage.getItem('tasks')
+  const [tasks, setTasks] = useState<Task[]>(() => {
+      const savedTasks = localStorage.getItem('tasks')
 
-    if (savedTasks != null){
-        return JSON.parse(savedTasks)
-    }else{
-        return []
-    }
-})
+      if (savedTasks != null){
+          return JSON.parse(savedTasks)
+      }else{
+          return []
+      }
+  })
 
+  const taskRano = tasks.filter((task) => task.timeOfDay === 'morning')
+  const taskDzien = tasks.filter((task) => task.timeOfDay === 'afternoon')
+  const taskWieczor = tasks.filter((task) => task.timeOfDay === 'evening')
 
   const handleToggle = (id: string) => {
     setTasks(tasks.map((task) => {
@@ -33,13 +36,30 @@ const [tasks, setTasks] = useState<Task[]>(() => {
     }
 
   return (
-    <div>
+    <div className="card">
       <h2>Moje Zadania</h2>
+
+      <h3>Rano</h3>
         {
-            tasks.map((task) => {
-                return <TaskItem key={task.id} task={task} onToggle={handleToggle} ></TaskItem>
-            })
+          taskRano.map((task) =>{
+            return <TaskItem key={task.id} task={task} onToggle={handleToggle} ></TaskItem>
+          })
         }
+      
+      <h3>Dzień</h3>
+        {
+          taskDzien.map((task) =>{
+            return <TaskItem key={task.id} task={task} onToggle={handleToggle} ></TaskItem>
+          })
+        }
+
+      <h3>Wieczór</h3>
+        {
+          taskWieczor.map((task) =>{
+            return <TaskItem key={task.id} task={task} onToggle={handleToggle} ></TaskItem>
+          })
+        }
+
         <AddTaskForm onAddTask={handleAddTask}></AddTaskForm>
     </div>
   )

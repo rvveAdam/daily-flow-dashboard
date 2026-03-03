@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import type { Expense } from '../../types/index'
 import ExpenseInput from './ExpenseInput'
 import ExpenseSummary from './ExpenseSummary'
+import ExpenseHistory from './ExpenseHistory'
+import AddCategoryModal from './addCategoryModal'
 
 function ExpenseModule() {
   const [expenses, setExpenses] = useState<Expense[]>(() => {
@@ -39,17 +41,45 @@ function ExpenseModule() {
     setCategories([...categories, name])
   }
 
+  const [isOpen, setIfIsOpen] = useState(false)
+
+  const handleIsOpen = () => {
+    setIfIsOpen(!isOpen)
+  }
+
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false)
+
+  const handleCategoryIsOpen = () => {
+    setIsCategoryOpen(!isCategoryOpen)
+  }
+
   return (
-    <div>
+    <div className="card">
       <h2>Wydatki</h2>
       <ExpenseInput
         categories={categories}
         onAddExpense={handleAddExpense}
-        onAddCategory={handleAddCategory}
       />
+
       <ExpenseSummary
         expenses={expenses}
       />
+
+      <div className="modal-buttons">
+        <button className="modal-btn" onClick={handleCategoryIsOpen}>Dodaj kategorię wydatków</button>
+        <AddCategoryModal
+          onAddCategory={handleAddCategory}
+          isOpen={isCategoryOpen}
+          onClose={handleCategoryIsOpen}
+        />
+
+        <button className="modal-btn" onClick={handleIsOpen}>Historia Wydatków</button>
+        <ExpenseHistory 
+          expenses={expenses}
+          isOpen={isOpen}
+          onClose={handleIsOpen}
+        />
+      </div>
     </div>
   )
 }

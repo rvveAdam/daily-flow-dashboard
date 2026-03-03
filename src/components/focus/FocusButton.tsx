@@ -5,8 +5,11 @@ interface FocusButtonProps {
 
 function FocusButton({ isFocusMode, onToggle }: FocusButtonProps) {
   return (
-    <button onClick={onToggle}>
-      {isFocusMode ? 'Wyłącz skupienie' : 'Tryb skupienia'}
+    <button
+      className={isFocusMode ? 'focus-button focus-button--active' : 'focus-button'}
+      onClick={onToggle}
+    >
+      {isFocusMode ? '✕ Wyłącz skupienie' : '⏱ Tryb skupienia'}
     </button>
   )
 }

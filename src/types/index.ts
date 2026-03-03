@@ -1,4 +1,5 @@
 export type RepeatType = 'none' | 'daily' | 'weekly' | 'monthly' | 'custom'
+export type TimeOfDay = 'morning' | 'afternoon' | 'evening'
 
 export interface Task{
     id: string
@@ -7,6 +8,7 @@ export interface Task{
     repeatType: RepeatType
     repeatDays: number[]  
     streak: number
+    timeOfDay: TimeOfDay
 }
 
 export type ExpenseCategory = string
@@ -18,5 +20,3 @@ export interface Expense {
   description: string
   date: string
 }
-
-

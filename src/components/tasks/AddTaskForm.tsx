@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { RepeatType, Task } from '../../types/index'
+import type { RepeatType, TimeOfDay, Task } from '../../types/index'
 
 interface AddTaskFormProps {
   onAddTask: (task: Task) => void
@@ -7,6 +7,7 @@ interface AddTaskFormProps {
 
 function AddTaskForm({ onAddTask }: AddTaskFormProps) {
   const [title, setTitle] = useState('')
+  const [timeOfDay, setTimeOfDay] = useState<TimeOfDay>('morning')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,7 +22,8 @@ function AddTaskForm({ onAddTask }: AddTaskFormProps) {
         done: false,
         repeatType: 'none' as RepeatType,
         repeatDays: [],
-        streak: 0
+        streak: 0,
+        timeOfDay: timeOfDay,
     }
 
     onAddTask(task)
@@ -29,8 +31,13 @@ function AddTaskForm({ onAddTask }: AddTaskFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
+    <form className="task-form" onSubmit={handleSubmit}>
+        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Nowe zadanie..." />
+        <select value={timeOfDay} onChange={(e) => setTimeOfDay(e.target.value as TimeOfDay)}>
+          <option value="morning">🌅 Rano</option>
+          <option value="afternoon">☀️ Dzień</option>
+          <option value="evening">🌙 Wieczór</option>
+        </select>
         <button type="submit">Dodaj</button>
     </form>
   )

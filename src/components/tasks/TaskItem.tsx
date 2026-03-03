@@ -7,12 +7,11 @@ interface TaskItemProps {
 
 function TaskItem({ task, onToggle }: TaskItemProps) {
   return (
-    <div>
-        <input type="checkbox" checked={task.done} onChange={() => onToggle(task.id) }/>
-        <span>{task.title}</span>
-        <span> 🔥 {task.streak}</span>
+    <div className="task-list">
+        <input className="task-list__checkbox" type="checkbox" checked={task.done} onChange={() => onToggle(task.id) }/>
+        <span className="task-list__title">{task.title}</span>
+        <span className="task-list__streak"> 🔥 {task.streak}</span>
     </div>
   )
 }
-
 export default TaskItem
